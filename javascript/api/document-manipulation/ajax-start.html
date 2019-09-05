@@ -61,11 +61,9 @@
       verseChoose.onchange = function(){
         let verse = verseChoose.vaule;
         updateDisplay(verse);
-      };
-      function updateDisplay(verse){
+        function updateDisplay(verse){
         verse = verse.replace(" ", "");
         verse = verse.toLowerCase();
-        var url = verse + '.txt';
         var url = verse + '.txt';
         let request = new XMLHttpRequest();
       request.open('GET', url);
@@ -75,6 +73,9 @@
       };
       request.send();
       }
+      };
+      updateDisplay('Verse 1');
+      verseChoose.vaule = 'Verse 1';
       
      
     </script>
