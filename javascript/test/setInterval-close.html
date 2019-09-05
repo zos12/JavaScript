@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Simple setInterval clock</title>
+    <style>
+      p {
+        font-family: sans-serif;
+      }
+      button{
+      	margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+  	<p class='clock'></p>
+  	<button class='start'>开始</button><button class='stop'>停止</button><button class='reset'>重置</button>
+    <script>
+    let Count = 0;
+    let para = document.querySelector('.clock');
+    function displayCount(){
+
+    	let hourCount = Math.floor((Count / 3600));
+    	let minuteCount = Math.floor((Count % 3600) / 60);
+    	let secondCount = Math.floor((Count % 3600) % 60) ;
+
+    	let hourDisplay = (hourCount < 10)?'0'+hourCount:hourCount;
+    	let minuteDisplay = (minuteCount < 10)?'0'+minuteCount:minuteCount;
+    	let secondDisplay = (secondCount < 10)?'0'+secondCount:secondCount;
+
+    	para.textContent = hourDisplay + ':' + minuteDisplay + ':' +secondDisplay; 
+    	Count++;
+    }
+    
+    let start = document.querySelector('.start');
+    let stop = document.querySelector('.stop');
+    let reset = document.querySelector('.reset');
+
+    let startTime;
+    start.onclick = function(){
+    	startTime = setInterval(displayCount, 1000);
+    	start.disabled = true;
+    }
+    stop.onclick = function(){
+    	clearInterval(startTime);
+    	start.disabled = false;
+    }
+    reset.addEventListener('click',function() {
+    	clearInterval(startTime);
+    	start.disabled = false;
+    	Count = 0;
+    	displayCount();
+    });
+    displayCount();
+    </script>
+  </body>
+</html>
