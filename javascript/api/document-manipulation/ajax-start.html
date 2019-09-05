@@ -61,7 +61,8 @@
       verseChoose.onchange = function(){
         let verse = verseChoose.vaule;
         updateDisplay(verse);
-        function updateDisplay(verse){
+      };
+      function updateDisplay(verse){
         verse = verse.replace(" ", "");
         verse = verse.toLowerCase();
         var url = verse + '.txt';
@@ -73,7 +74,7 @@
       };
       request.send();
       }
-      };
+      
       updateDisplay('Verse 1');
       verseChoose.vaule = 'Verse 1';
       
