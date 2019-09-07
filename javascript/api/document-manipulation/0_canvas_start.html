@@ -34,13 +34,27 @@
 	ctx.strokeRect(25,25,175,200);*/
    
 
-   ctx.strokeStyle='rgb(255,0,0)';
+   /*ctx.strokeStyle='rgb(255,0,0)';
    ctx.lineWidth = 5;
    ctx.beginPath();
    ctx.moveTo(200,200);
    ctx.lineTo(300,300);
    ctx.lineTo(400,500);
    ctx.lineTo(200,200);
+   ctx.stroke();*/
+
+   function degToRad(degrees){
+   	return degrees * Math.PI / 180;
+   }
+
+   ctx.strokeStyle = 'rgb(255,0,0)';
+   ctx.lineWidth = 10;
+   ctx.beginPath();
+   ctx.moveTo(50, 50);
+   ctx.lineTo(150,50);
+   var triHeight = 50 * Math.tan(degToRad(60));
+   ctx.lineTo(100,50 + triHeight);
+   ctx.lineTo(50,50);
    ctx.stroke();
     </script>
   </body>
