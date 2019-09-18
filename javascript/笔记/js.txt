@@ -127,7 +127,7 @@ type：表示脚本语言的内容类型。默认是text/javascript
        \unnnn ---以十六进制代码nnnn表示的一个Unicode字符 \u03a3表示希腊字符
        字符串长度.length
      2、字符串的特点
-       字符串一旦创建，他们的值就不能改变。
+       字符串一旦创建，他们的值就不能改变。要想改变原来的字符串，就要先销毁它
      3、转换为字符串
        toString()方法
        调用数值的toString()方法可以传递一个参数，输出数值的基数。
@@ -136,7 +136,7 @@ type：表示脚本语言的内容类型。默认是text/javascript
        num.toString(); "10"
        在不确定要转换的值是不是null或者undefined的情况下，用String()，能将任何类型的值转换为字符串
        如果值是null，返回“null”
-       如果值是undefin，返回"undefined"
+       如果值是undefined，返回"undefined"
        如果值有toString()方法，调用该方法并返回相应的结果
    3.8、Object类型
      对象就是一组数据和功能的集合
@@ -167,4 +167,218 @@ type：表示脚本语言的内容类型。默认是text/javascript
   4.2、位操作符
     NaN和Infinity应用位操作符时，会被当作0处理
     1、按位非(NOT)
-      ~ 操作数的负值减一
+      ~ 操作数的负值减一,按位非是在数值表示的最底层执行操作，所以速度最快
+      var num = 1;
+      var num1 = ~num;
+    2、按位与(AND)
+      & var result = 2 & 3
+    3、按位或(OR)
+      | 25 | 3 =27
+    4、按位异或(XOR)
+      ^ 25 ^ 3 = 26
+    5、左移
+      << 用0填充，不会影响操作数的符号位
+    6、有符号右移
+      >> 将数值右移，用符号位的值填充，会保留符号位
+    7、无符号右移
+      >>> 用0填充，对负数影响大
+  4.3、布尔操作符
+  非(NOT)、与(AND)、或(OR)
+    1、逻辑非
+      逻辑非操作符由一个叹号(!)表示，可以应用于ECMAScript中的任何值。无论值是什么数据类型，这个操作符都会返回一个布尔值
+      用两个逻辑非操作符会模拟Boolean()转型函数的行为。
+      !!"blue"  == Boolean("blue")
+    2、逻辑与
+      逻辑与操作符由两个和号(&&)表示，可以应用任何数据类型的操作数，不仅仅是布尔值。如果有一个操作数不是布尔值，逻辑与操作就不一定布尔值。
+        如果第一个操作数是对象，则返回第二个操作数
+        如果第二个操作数是对象，只有在第一个操作数的求值结果为true才返回该对象
+        如果两个操作数都是对象，则返回第二个操作数
+        如果有一个操作数是null，则返回null
+        如果有一个操作数是NaN，则返回NaN
+        如果有一个操作数是undefined，则返回undefined
+      逻辑与操作属于短路操作，即第一个操作数能确定结果，那么不会对第二个操作数求值
+    3、逻辑或
+      由两个竖线(||)表示，如果有一个操作数不是布尔值，逻辑或不一定返回布尔值
+      逻辑或操作属于短路操作
+  4.4、乘性操作符
+  乘法、除法、求模，在操作数为非数值的情况下执行自动的类型转换。如果操作数不是数值，后台会自动进行Number()转型函数将其转换为数值。
+    1、乘法
+      由*表示
+      如果乘积超出ECMAScript数值范围，返回Infinity或-Infinity
+      如果有一个操作数是NaN，结果是NaN
+      如果Infinity与0相乘，则结果是NaN
+      如果Infinity与非0数值相乘，结果是Infinity或-Infinity
+      Infinity*Infinity == Infinity
+    2、除法
+      由/表示
+      如果有一个操作数是NaN，则结果是NaN
+      Infinity / Infinity == NaN
+      0 / 0 == NaN
+      非零有限数被零除，如 8/0 9/0 10/0，结果是Infinity或-Infinity
+      如果是Infinity被任何非零数值除，结果是Infinity或-Infinity
+    3、求模
+      由%表示
+      如果被除数是无限大而除数有限大，则结果是NaN
+      被除数是有限大而除数是零，则结果是NaN
+      Infinity % Infinity == NaN
+      有限大 % 无穷大 == 有限大
+      0 % 任何数 == 0
+  4.5、加性操作符
+    1、加法
+      如果两个操作数都是数值，执行常规的加法运算
+        如果有一个是NaN，则结果是NaN
+        Infinity + Infinity == Infinity
+        +0 + +0 == +0
+        -0 + -0 == -0
+        +0 + -0 == +0
+      如果一个操作数是字符串：
+        如果两个操作数都是字符串，则拼接两个字符串
+        如果只有一个是字符串，将另一个操作数转换为字符串，再拼接起来
+        如果由一个操作数是布尔值、对象，则调用toString()方法取得对应的字符串，再拼接起来
+  
+        var num1 = 5;
+        var num2 = 10;
+        var result = "the sum is" + num1 + num2; //the sum is 510
+        会将num1和num2转换为字符串再拼接
+        改正：var result = "the sum is" + (num1 + num2);
+    2、减法
+      -
+      如果由一个操作数是NaN,则返回NaN
+      Infinity - Infinity == NaN
+      -Infinity - -Infinity == NaN
+      Infinity - -Infinity == Infinity
+      -Infinity - Infinity == -Infinity
+      +0 - +0 == +0
+      -0 - -0 == +0
+      +0 - -0 == -0
+      如果有一个操作数是字符串、布尔值、null或undefined，则先用Number()转换为数值，如果是NaN  ，则返回NaN
+      如果有一个操作数是对象，则调用对象的valueOf()方法取得表示该对象的数值。如果没有valueOf()则调用toString()方法，并将字符串转换为数值
+  4.6、关系操作符
+    < > <= >=
+    返回布尔值
+    如果两个操作数都是字符串，则比较两个字符串对应的字符编码值
+    如果有一个操作数是数值，则将另一个操作数转换为数值
+    如果一个操作数是对象，则调用对象的valueOf()或者toString()
+    如果一个操作数是布尔值，则将其转换为数值
+    如果一个操作数是NaN，返回false
+  4.7、相等操作符
+    相等和不相等：先转换再比较
+    全等和不全等：仅比较不转换
+    1、相等和不相等
+      == ！=
+      如果有一个操作数是布尔值，则先转换为数值再比较
+      如果有一个操作数是字符串，另一个是数值，则将字符串转换为数值再比较
+      如果有一个操作数是是对象，另一个不是，则调用对象的valueOf()
+      null和undefined 是相等的
+      要比较相等性，不能将null和undefined转换为其他任何值
+      如果有一个操作数是NaN，相等操作符返回false
+      如果两个操作数都是对象，则比较她们是不是同一个对象
+    2、全等和不全等
+      === ！== 不转换操作数
+  4.8、条件操作符
+    variable = boolean_expression ? ture_value : flase_value;
+  4.9、赋值运算符
+    =
+  4.10、逗号操作符
+    可以在一条语句中执行多个操作
+    var num = (5,1,2,3) //3
+5、语句
+  5.1、if语句
+    if(condition) statement1 else statement2
+    ECMAScript会自动调用Boolean()函数将condition结果转为布尔值。
+  5.2、do-while语句
+    是一种后测试循环语句，则只有在循环体中的代码执行之后，才会测试出口条件。
+    do{
+      statement
+    }while(expression);
+    循环体至少被执行一次
+  5.3、while语句
+    是一种前测试循环语句，在循环体内的代码被执行之前，就会对出口条件求值。
+    while(expression) statement
+  5.4、for语句
+    是一种前测试循环语句
+    ECMAScript不存在块级作用域，因此在循环内部定义的变量也可以在外部访问到
+    var count = 10;
+    for(var i = 0; i < count; i++){
+       alert(i);
+    }
+    alert(i); // 10
+  5.5、for-in语句
+    是一种精准的迭代语句，可以用来枚举对象的属性。
+    for(property in expression) statement
+
+    for(var propName in window){
+        document.write(propName);
+    } //显示了BOM中window对象的所有属性
+    如果要迭代的对象的变量值为null或undefined，for-in会抛出错误。ECMAScript5更正了这一行为，不再抛出错误，而是不再循环循环体，保证最大限度的兼容性，在使用for-in循环之前，先检测确认该对象的值是不是null 或 undefined
+  5.6、label语句
+    使用label语句可以在代码中添加标签，以便将来使用。
+    label: statement
+    start: for(var i = 0; i < count; i++){
+        alert(i);
+    }
+    start标签可以在将来由break或continue语句引用。加标签的语句一般都要与for语句等循环语句配合使用
+  5.7、break和continue语句
+  5.8、with语句
+    with语句的作用是将代码的作用域设置到一个特定的对象中。
+    with(expression) statement;
+    简化多次编写同一对象的工作
+    var qs = location.search.substring(1);
+    var hostName = location.hostname;
+    var url = location.href;
+    可以写成
+    with(location){
+        var qs = search.substring(1);
+        var hostName = hostname;
+        var url = href;
+    }
+    with语句关联了location对象，这意味着在with代码块里，每个变量首先被认为是局部变量
+    严格模式下不允许使用with语句，语法错误。
+  5.9、switch语句
+    switch与if语句关系最为密切，流控制语句。
+    switch(expression){
+        case value:statement
+            break;
+        case value:statement
+            break;
+        default: statement
+            break;
+    }
+    可以在switch语句中使用任何数据类型，每个case的值不一定是常量，可以是变量，甚至是表达式
+6、函数
+  function functionName(arg0, arg1,...){
+      statements
+  }
+  如果有return返回值，执行完return语句后函数停止并退出，因此位于return后面的代码都永远不会被执行。
+  return; 没有任何返回值。函数执行后将返回undefined
+  6.1、理解参数
+    ECMAScript函数不介意传递进来多少个参数,也不介意传递进来的参数类型，哪怕你定义的函数只接受两个参数，在调用这个函数的时候不一定要传递两个参数，可以是一个两个或者多个。因为参数在内部是一个数组表示，在函数体内可以通过arguments对象来访问这个参数数组。
+    "use strict";
+    function add(num1, num2){ 
+      alert(arguments[0] + arguments[1] + arguments[2]);
+    }
+    add(80,90,10);
+
+    arguments.length
+    arguments对象可以和命名参数一起使用，arguments对象的值永远与对应的命名参数的值保持同步。如果只传入一个参数，arguments[1]的值不会反应到命名参数中。
+    arguments对象的长度由传入的参数个数决定，不是由定义函数时的命名参数个数决定的。
+    没有传递值的命名参数将自动被赋予undefined值
+
+    function add(num1, num2){ 
+      arguments[1] = 10;
+      alert(num1+num2  );
+    }
+    add(80,30); //90
+
+    "use strict"
+    function add(num1, num2){ 
+      arguments[1] = 10;
+      alert(num1+num2  );
+    }
+    add(80,30); //110
+    在严格模式下，重写arguments对象的值代码不会执行
+  6.2、没有重载
+    签名：接受的参数的类型和数量
+    ECMAScript函数没有签名，是因为其参数是包含零个或多个值的数组来表示的。没有签名，就不能做到重载。
+    如果定义了两个名字相同的函数，该名字属于后定义的函数。
+    
