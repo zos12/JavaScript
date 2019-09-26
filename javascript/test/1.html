@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+ <title>document.write() Example 4</title>
 </head>
 <body>
-	<script>
-		"use strict"
-		function add(num1, num2){	
-			arguments[1] = 10;
-			alert(num1+num2  );
-		}
-		add(80,30);
-
-	</script>
+ <p>This is some content that you won't get to see because it will be overwritten.</p>
+ <script type="text/javascript">
+ window.onload = function(){
+ document.write("Hello world!");
+ };
+ </script>
 </body>
 </html>
