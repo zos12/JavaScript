@@ -1,20 +1,31 @@
 <html>
 <head>
- <title>document.write() Example 4</title>
+ <title></title>
+	 <script src="vue.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-<div id="content">
- <p>This is a <strong>paragraph</strong> with a list following it.</p>
- <ul>
- <li>Item 1</li>
- <li>Item 2</li>
- <li>Item 3</li>
- </ul>
-</div> 
- <script >
- 	const d = document.getElementById("content");
-d.outerHTML = "<p>This is a paragraph.</p>"; 
-console.log(d.outerHTML);
- </script>
+	<div id="app">
+		<template v-if="loginType === 'username'">
+		  <label>Username</label>
+		  <input placeholder="Enter your username" key="username-input">
+		</template>
+		<template v-else>
+		  <label>Email</label>
+		  <input placeholder="Enter your email address" key="email-input">
+		</template>
+		<br>
+		<button v-on:click="click1">toggle login type</button>
+	</div>
+	<script type="text/javascript">
+	var vm =new Vue({
+		  el: '#app',
+		  data: {
+			 type: 'A',
+			 
+		  }  
+		});
+	
+	</script>
+	
 </body>
 </html>
