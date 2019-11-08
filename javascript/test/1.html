@@ -1,31 +1,70 @@
+<!DOCTYPE html>
 <html>
-<head>
- <title></title>
-	 <script src="vue.js" type="text/javascript" charset="utf-8"></script>
-</head>
-<body>
-	<div id="app">
-		<template v-if="loginType === 'username'">
-		  <label>Username</label>
-		  <input placeholder="Enter your username" key="username-input">
-		</template>
-		<template v-else>
-		  <label>Email</label>
-		  <input placeholder="Enter your email address" key="email-input">
-		</template>
-		<br>
-		<button v-on:click="click1">toggle login type</button>
-	</div>
-	<script type="text/javascript">
-	var vm =new Vue({
-		  el: '#app',
-		  data: {
-			 type: 'A',
-			 
-		  }  
-		});
-	
-	</script>
-	
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>页面布局</title>
+        <style>
+            .box{
+                width:800px;
+                height: 600px;
+                text-align: center;
+                line-height: 60px;
+            }
+            .container{
+                width: 805px;
+                margin:0 auto;
+            }
+            .header{
+                width:100%;
+                height:60px;
+                background: orange;
+            }
+            .content{
+                position: relative;
+                width:700px;
+                margin:0 auto;
+            }
+            .content_body{
+                position: relative;
+                width:100%;
+                height:480px;
+                background: black;    
+                overflow: hidden;  
+                display: flex;    
+            }
+            .content_footer{
+                position: relative;
+                height:60px;
+                background: orangered;
+                width:100%;
+               
+            }
+            .left{
+                height:100%;
+                width:300px;
+                float: left;
+                background: orchid;
+            }
+           
+            .right{
+                flex: 1;           
+                background:yellowgreen;
+            }
+        </style>
+    </head>
+    <body>
+         <div class="container">
+             <div class="box">
+                <div class="header">header</div>
+                <div class="content">
+                    <div class="content_body">
+                         <div class="left"></div>
+                        
+                         <div class="right"></div>
+                    </div>
+                    <div class="content_footer">footer</div>
+                </div>
+             </div>
+         </div>
+    </body>
 </html>
